@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>403 - Access Denied</title>
+    <link rel="stylesheet/less" href="/css/403/style.scss" />
+</head>
+
+<body>
+    <div class="container">
+        <h1>4
+            <div class="lock">
+                <div class="top"></div>
+                <div class="bottom"></div>
+            </div>3</h1>
+        <p>Xin lỗi, quý khách không có quyền truy cập tài nguyên này</p>
+        <a href="/">Về trang chủ</a>
+    </div>
+</body>
+<script src="/webjars/less/dist/less.min.js"></script>
+<script>
+    const interval = 500;
+
+    function generateLocks() {
+        const lock = document.createElement('div'),
+            position = generatePosition();
+        lock.innerHTML = '<div class="top"></div><div class="bottom"></div>';
+        lock.style.top = position[0];
+        lock.style.left = position[1];
+        lock.classList = 'lock' // generated';
+        document.body.appendChild(lock);
+        setTimeout(() => {
+            lock.style.opacity = '1';
+            lock.classList.add('generated');
+        }, 100);
+        setTimeout(() => {
+            lock.parentElement.removeChild(lock);
+        }, 2000);
+    }
+
+    function generatePosition() {
+        const x = Math.round((Math.random() * 100) - 10) + '%';
+        const y = Math.round(Math.random() * 100) + '%';
+        return [x, y];
+    }
+    setInterval(generateLocks, interval);
+    generateLocks();
+</script>
+
+</html>

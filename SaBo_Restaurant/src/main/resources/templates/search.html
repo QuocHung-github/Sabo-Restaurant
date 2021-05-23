@@ -1,0 +1,355 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>SaBo Restaurant | Tìm kiếm nhà hàng</title>
+
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Bungee+Inline&display=swap" rel="stylesheet">
+
+		<!-- Animate.css -->
+		<link rel="stylesheet" th:href="@{/webjars/animate.css/animate.css}"> 
+		<!--<link rel="stylesheet" th:href="@{/dist/animate.css/animate.css}" />-->
+		<!-- Icomoon Icon Fonts-->
+		<link rel="stylesheet" th:href="@{/css/index/icomoon.css}">
+		<!-- Themify Icons-->
+		<link rel="stylesheet" th:href="@{/css/index/themify-icons.css}">
+		<!-- Bootstrap  -->
+		<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+
+		<!-- Magnific Popup -->
+		<link rel="stylesheet" th:href="@{/webjars/Magnific-Popup/magnific-popup.css}">
+
+		<!-- Bootstrap DateTimePicker -->
+		<link rel="stylesheet" type="text/css"
+			th:href="@{/webjars/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css}">
+
+
+
+		<!-- Owl Carousel  -->
+		<link rel="stylesheet" th:href="@{/webjars/OwlCarousel/owl.carousel.css}">
+		<!-- <link rel="stylesheet" href="css/owl.theme.default.min.css"> -->
+
+		<!-- Theme style  -->
+		<link rel="stylesheet" th:href="@{/css/style.css}">
+
+		<!-- Modernizr JS -->
+		<script th:src="@{/webjars/modernizr/modernizr.min.js}"></script>
+		<!-- FOR IE9 below -->
+		<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]
+		<style>
+			.active_state {
+				height: 17px;
+				width: 17px;
+				background-color: green;
+				border-radius: 50%;
+				display: inline-block;
+				vertical-align: middle;
+				float: none;
+			}
+
+			.inactive_state {
+				height: 17px;
+				width: 17px;
+				background-color: red;
+				border-radius: 50%;
+				display: inline-block;
+				vertical-align: middle;
+				float: none;
+			}
+
+			.busy_state {
+				height: 17px;
+				width: 17px;
+				background-color: gray;
+				border-radius: 50%;
+				display: inline-block;
+				vertical-align: middle;
+				float: none;
+			}
+		</style>-->
+		<base href="/"/>
+	</head>
+
+<body>
+
+	<div class="gtco-loader"></div>
+
+	<div id="page">
+
+
+		<!-- <div class="page-inner"> -->
+		<nav class="gtco-nav" role="navigation">
+			<div class="gtco-container">
+
+				<div class="row">
+					<div class="col-sm-4 col-xs-12">
+						<div id="gtco-logo">
+							<a href="/index">SaBo Restaurant.</a>
+						</div>
+					</div>
+					<div class="col-xs-8 text-right menu-1">
+						<ul>
+							<li class="btn-cta" sec:authorize="isAnonymous()"><a
+								href="/login"><span>ĐĂNG NHẬP</span></a></li>
+
+							<li class="has-dropdown" sec:authorize="hasRole('CUSTOMER')">
+								<a>Xin chào, <span sec:authentication="name"></span></a>
+								<ul class="dropdown">
+									<li><a href="/customer/index">Quản lý tài khoản</a></li>
+									<li><a style="cursor: pointer;" onclick="document.forms['logoutForm'].submit()">Đăng xuất</a></li>
+								</ul>
+							</li>
+							<li class="has-dropdown" sec:authorize="hasRole('MERCHANT')">
+								<a>Xin chào, <span sec:authentication="name"></span></a>
+								<ul class="dropdown">
+									<li><a href="/merchant/index">Quản lý nhà hàng</a></li>
+									<li><a style="cursor: pointer;" onclick="document.forms['logoutForm'].submit()">Đăng xuất</a></li>
+								</ul>
+							</li>
+							<li class="has-dropdown" sec:authorize="hasRole('ADMIN')">
+								<a>Xin chào quản lý <span sec:authentication="name"></span></a>
+								<ul class="dropdown">
+									<li><a href="/manager/index">Quản lý</a></li>
+									<li><a style="cursor: pointer;" onclick="document.forms['logoutForm'].submit()">Đăng xuất</a></li>
+								</ul>
+							</li>
+						</ul>
+						
+						<form id="logoutForm" method="POST" th:action="@{/logout}">
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+						</form>
+					</div>
+				</div>
+
+			</div>
+		</nav>
+
+		<header id="gtco-header" class="gtco-cover gtco-cover-md" role="banner"
+			style="background-image: url(/images/nh3.jpg)" data-stellar-background-ratio="0.5">
+			<div class="overlay"></div>
+			<div class="gtco-container">
+				<div class="row">
+					<div class="col-md-12 col-md-offset-1 text-left">
+						<div class="row row-mt-15em">
+							<div class="col-md-12 mt-text animate-box animate__animated animate__fadeInUp">
+								<h1 class="cursive-font">Sabo Restaurant</h1>
+							</div>
+						</div>		 <div class="s005">
+                <form  name="searchForm" action="/search/result" method="POST">
+                 <fieldset>
+                    <legend> 
+                    <div class="inner-form">
+                      <div class="input-field">
+                        <input class="form-control" id="choices-text-preset-values search" name="search" type="text" style="font-size: 35px; color: #fff"
+                          placeholder="TÌM NHÀ HÀNG . . ." />
+                        <button class="btn-search" type="submit">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
+                            </path>
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                    </legend>
+                  </fieldset>	
+                </form>
+              </div>
+						<!-- 	<div class="s131">
+								<form name="searchForm" action="/search/result" method="POST">
+									<div class="inner-form">
+										<div class="input-field first-wrap">
+											<input id="search" name="search" type="text"
+												placeholder="Bạn cần tìm nhà hàng nào" />
+										</div>
+										<div class="input-field third-wrap">
+											<button class="btn-search" type="submit">Tìm kiếm</button>
+										</div>
+									</div>
+								</form>
+							</div> -->
+					</div>
+				</div>
+			</div>
+			
+		</header>
+	</div>
+<section >
+	<div class="gtco-section" >
+		<div class="gtco-container">
+			<div class="row">
+				<div class="container-fluid">
+					<div class="row content">
+						<!-- <div class="col-sm-3 sidenav">
+							<h4>Quảng cáo ở đây</h4>
+						</div> -->
+						<div class="col-sm-9" id="searchView">
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+
+
+					<footer id="gtco-footer" role="contentinfo" style="background-image: url(images/footerbg.jpg)"
+						data-stellar-background-ratio="0.5">
+						<div class="overlay"></div>
+						<div class="gtco-container">
+							<div class="row row-pb-md">
+								<div class="col-md-12 text-center">
+									<div class="gtco-widget">
+										<h3>Liên hệ với chúng tôi</h3>
+										<ul class="gtco-quick-contact">
+											<li><a href="#"><i class="icon-phone"></i> +1 234 567
+													890</a></li>
+											<li><a href="#"><i class="icon-mail2"></i> info@info.com</a></li>
+											<li><a href="#"><i class="icon-chat"></i> Live Chat</a></li>
+										</ul>
+									</div>
+									<div class="gtco-widget">
+										<h3>Mạng xã hội</h3>
+										<ul class="gtco-social-icons">
+											<li><a href="#"><i class="icon-twitter"></i></a></li>
+											<li><a href="#"><i class="icon-facebook"></i></a></li>
+											<li><a href="#"><i class="icon-linkedin"></i></a></li>
+											<li><a href="#"><i class="icon-dribbble"></i></a></li>
+										</ul>
+									</div>
+								</div>
+
+								<div class="col-md-12 text-center copyright">
+									Made with ❤️ by <i class="fa fa-love"></i><a
+										href="https://www.facebook.com/TonyHungjin">KrisHung</a>
+								</div>
+
+							</div>
+
+
+
+						</div>
+					</footer>
+					<!-- </div> -->
+
+				</div>
+
+				<div class="gototop js-top">
+					<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+				</div>
+
+
+				<!-- <script src="js/extention/choices.js"></script> -->
+				<!-- jQuery -->
+				<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+				<!-- jQuery Migrate-->
+				<script th:src="@{/webjars/jquery-migrate/jquery-migrate.min.js}"></script>
+				<!-- jQuery Easing -->
+				<script th:src="@{/webjars/jquery-easing/jquery.easing.min.js}"></script>
+				<!-- Bootstrap -->
+				<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+				<!-- Waypoints -->
+				<script th:src="@{/webjars/jquery-waypoints/waypoints.min.js}"></script>
+				<!-- Carousel -->
+				<script th:src="@{/webjars/OwlCarousel/1.3.2/owl.carousel.min.js}"></script>
+				<!-- countTo -->
+				<script th:src="@{/webjars/jquery-countTo/jquery.countTo.js}"></script>
+
+				<!-- Stellar Parallax -->
+				<script th:src="@{/webjars/stellar.js/0.6.2/jquery.stellar.min.js}"></script>
+
+				<!-- Magnific Popup -->
+				<script th:src="@{/webjars/Magnific-Popup/jquery.magnific-popup.min.js}"></script>
+				<script th:src="@{/js/index/magnific-popup-options.js}"></script>
+
+				<script th:src="@{/webjars/momentjs/min/moment.min.js}"></script>
+				<script th:src="@{/webjars/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js}"></script>
+				<script th:src="@{/webjars/WOW/wow.min.js}"></script>
+
+				<!-- Main -->
+				<script th:src="@{/js/main.js}"></script>
+</body>
+<script>
+	$(document).ready(function () {
+		$("form[name='searchForm']").on('submit', function (e) {
+			e.preventDefault();
+			let form = $(this);
+			let CSRFToken = $("meta[name=_csrf]").attr("content");
+
+			$.ajax({
+				url: form.attr('action') + encodeURI(`?search=${form.find("input[name='search']").val()}`),
+				type: form.attr('method'),
+				contentType: "application/json",
+				cache: false,
+				headers: {
+					"accept": "application/json",
+					"Access-Control-Allow-Origin": "*"
+				},
+				processData: false,
+				beforeSend: function (xhr, settings) {
+					if (typeof CSRFToken === "string")
+						xhr.setRequestHeader('X-CSRF-Token', CSRFToken);
+
+					form.find("button[type=submit]").prop("disabled", true);
+				},
+				success: function (data, statusText, jqXHR) {
+					console.log(data);
+
+					$("#searchView").empty();
+
+					if (data.length > 0) {
+
+						data.forEach(function (item, index) {
+							$(`<div class="media">
+				<div class="media-left media-top">
+					<img src="${'/images/restaurant/' + item.logo.image}" class="media-object"
+					style="width: 255pt; height: 255pt;">
+				</div>
+				<div class="media-body">
+						<h4 class="media-heading">Đã được đặt ${item.bookedTimes} lần</h4>
+						<div class="fh5co-text">
+							<h2>${item.restaurantName}</h2>
+							<a type="button" class="btn btn-primary" href="/restaurantinfo/detail?id=${item.id}">Xem nhà hàng</a>
+							<p>${item.overview}</p>
+							<p>Mở cửa: ${item.openTime} - Đóng cửa: ${item.closeTime}</p>
+							<p>Trạng thái:  <span id="state" 
+							class="${item.state == 0 ? 'inactive_state' : (item.state == 1 ? 'active_state' : 'busy_state')}"></span> 
+							${item.state == 0 ? '(Đóng cửa)' : (item.state == 1 ? '(Mở cửa)' : '(Đang bận)')}</p>
+						</div>
+					</div>
+				</div> <hr/> <br />`).appendTo("#searchView");
+						});
+					} else {
+						$(`<div class="fh5co-text text-center">
+							<h2>Không tìm thấy nhà hàng nào phù hợp với kết quả cần tìm</h2>
+						</div>`).appendTo("#searchView");
+					}
+
+					if ($("ul#appetizers").children().length < 0) $("ul#appetizers").append("");
+
+					form.find("button[type=submit]").prop("disabled", false);
+				}
+			});
+		});
+
+		let params = new URLSearchParams(window.location.search);
+		let search = params.get("search");
+
+		if (search) {
+			$("form[name='searchForm'] input[name='search']").val(search);
+		}
+
+		$("form[name='searchForm']").submit();
+	});
+</script>
+
+</html>
