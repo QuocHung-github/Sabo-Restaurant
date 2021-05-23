@@ -1,0 +1,94 @@
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+      hibernate:
+        #type: TRACE
+
+      
+server:
+  error:    whitelabel:      enabled: true
+  #forward-headers-strategy: NATIVE
+  #tomcat:
+    #remoteip:
+      #remote-ip-header: X-FORWARDED-FOR
+      #protocol-header: X-FORWARDED-PROTO
+  #address: 192.168.x.x
+  port: ${PORT:8440}
+  ssl:
+    key-store: classpath:test.p12
+    key-store-password: test123
+    key-store-type: pkcs12
+    #key-alias: "localhost"
+    enabled: true
+  compression:
+    enabled: true
+    #mime-types: text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json
+  http2:
+    enabled: true
+  servlet:
+    #context-path: /PRO2112_Final
+    session:
+      cookie:
+        http-only: true
+        secure: true
+        #max-age: 2592000 #Cookies expire after 30 days
+      tracking-modes: cookie
+
+spring:
+  application:
+    name: PRO2112_Final
+  datasource:
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    #driver-class-name:  com.mysql.cj.jdbc.Driver
+    password: 'Westpalmbeach2017'
+    url: jdbc:sqlserver://localhost:1433;databaseName=RestaurantBooking
+    #url: jdbc:mysql://localhost:3306/restaurantbooking
+    username: 'sa'
+    #username: 'root'
+    #hikari:
+      #connection-timeout: 7000       
+  jpa:
+    hibernate:
+      #naming-strategy: org.hibernate.cfg.EJB3NamingStrategy
+      ddl-auto: none
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
+        #implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.SQLServer2012Dialect
+        #dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true       
+    show-sql: false
+  thymeleaf:
+    cache: false
+    mode: HTML
+    suffix: .html
+    encoding: UTF-8
+    enable-spring-el-compiler: true
+  jackson:    
+    serialization:      write-dates-as-timestamps: false
+  #mvc:
+    #throw-exception-if-no-handler-found: true
+    #servlet:
+      #path: /PRO2112_Final
+  servlet:    multipart:      max-file-size: 10MB      max-request-size: 10MB       mail:
+    default-encoding: UTF-8
+    host: smtp.gmail.com
+    username: danhntps09651@fpt.edu.vn
+    password: SaBoRestaurant123
+    port: 587
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+    protocol: smtp
+    test-connection: false
+#security:
+  #require-ssl: false
+

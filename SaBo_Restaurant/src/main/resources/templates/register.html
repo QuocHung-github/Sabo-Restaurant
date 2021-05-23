@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>AdminLTE 3 | Registration Page</title>
+
+	<!-- Google Font: Source Sans Pro -->
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+	<!-- icheck bootstrap -->
+	<link rel="stylesheet" th:href="@{/webjars/icheck-bootstrap/icheck-bootstrap.min.css}">
+	<!-- Theme style -->
+	<link rel="stylesheet" th:href="@{/css/adminlte.min.css}">
+
+	<base href="/" />
+</head>
+
+<body class="hold-transition register-page">
+	<div class="register-box">
+		<div class="register-logo">
+			<a href="/index"><b>Sabo</b>Retautrant</a>
+		</div>
+
+		<div class="card">
+			<div class="card-body register-card-body">
+				<p class="login-box-msg">Đăng ký khách hàng</p>
+
+				<form class="needs-validation" th:action="@{/customer/register}" method="POST" novalidate>
+					<div class="input-group mb-3">
+						<div class="input-group-append">
+							<div class="input-group-text">
+								<span class="fas fa-user"></span>
+							</div>
+						</div>
+						<input type="text" class="form-control" name="lastname" placeholder="Họ" required>
+						<div class="invalid-feedback">
+							Vui lòng không bỏ trống họ
+						</div>
+					</div>
+					<div class="input-group mb-3">
+						<div class="input-group-append">
+							<div class="input-group-text">
+								<span class="fas fa-user"></span>
+							</div>
+						</div>
+						<input type="text" class="form-control" name="firstname" placeholder="Tên" required>
+						<div class="invalid-feedback">
+							Vui lòng không bỏ trống tên
+						</div>
+					</div>
+					<div class="input-group mb-3">
+						<div class="form-row">
+							<div class="input-group-append">
+								<div class="input-group-text">
+									<i class="fas fa-venus-mars"></i>
+								</div>
+							</div>
+							<select class="form-control col" name="gender" required>
+								<option value="1" selected>Nam</option>
+								<option value="0">Nữ</option>
+								<option value="2">Khác</option>
+							</select>
+							<div class="invalid-feedback">
+								Vui lòng chọn giới tính
+							</div>
+						</div>
+					</div>
+					<div class="input-group mb-3">
+						<div class="input-group-append">
+							<div class="input-group-text">
+								<i class="fas fa-calendar-alt"></i>
+							</div>
+						</div>
+						<input type="date" class="form-control" name="birthday" placeholder="Ngày sinh" required>
+						<div class="invalid-feedback">
+							Vui lòng chọn ngày tháng năm sinh
+						</div>
+					</div>
+					<div class="input-group mb-3">
+						<div class="input-group-append">
+							<div class="input-group-text">
+								<span class="fas fa-envelope"></span>
+							</div>
+						</div>
+						<input type="email" class="form-control" name="email" placeholder="Email" required>
+						<div class="invalid-feedback">
+							Vui lòng không bỏ trống email
+						</div>
+					</div>
+					<div class="input-group mb-3">
+						<div class="input-group-append">
+							<div class="input-group-text">
+								<i class="fas fa-phone"></i>
+							</div>
+						</div>
+						<input type="text" class="form-control" name="phone" placeholder="Số điện thoại" required>
+						<div class="invalid-feedback">
+							Vui lòng không bỏ trống số điện thoại
+						</div>
+					</div>
+					<div class="input-group mb-3">
+						<div class="input-group-append">
+							<div class="input-group-text">
+								<i class="fas fa-map-marked-alt"></i>
+							</div>
+						</div>
+						<input type="text" class="form-control" name="address" placeholder="Địa chỉ" required>
+					</div>
+					<div class="input-group mb-3">
+						<div class="input-group-append">
+							<div class="input-group-text">
+								<i class="fas fa-user-circle"></i>
+							</div>
+						</div>
+						<input type="text" class="form-control" name="username" placeholder="Tài khoản" required>
+						<div class="invalid-feedback">
+							Vui lòng không bỏ trống tài khoản
+						</div>
+					</div>
+					<div class="input-group mb-3">
+						<div class="input-group-append">
+							<div class="input-group-text">
+								<i class="fas fa-key"></i>
+							</div>
+						</div>
+						<input type="password" class="form-control" name="password" placeholder="Mật khẩu"
+							pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" required>
+						<div class="invalid-feedback">
+							Vui lòng nhập mật khẩu hợp lệ:<br/>
+							- Ít nhất 8 ký tự.<br/>
+							- Ít nhất 1 chữ cái.<br/>
+							- Ít nhất 1 số<br/>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-8">
+							<div class="icheck-primary">
+								<input type="checkbox" id="agreeTerms" name="terms" value="agree">
+								<label for="agreeTerms">
+									Tôi đồng ý với các <a href="#">điều khoản người dùng</a>
+								</label>
+							</div>
+						</div>
+						<!-- /.col -->
+						<div class="col-4">
+							<button type="submit" class="btn btn-primary btn-block">Tạo tài khoản</button>
+						</div>
+						<!-- /.col -->
+					</div>
+				</form>
+
+				<a href="/login" class="text-center">Bạn đã có tài khoản</a>
+			</div>
+			<!-- /.form-box -->
+		</div><!-- /.card -->
+	</div>
+	<!-- /.register-box -->
+
+	<!-- jQuery -->
+	<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+	<script th:src="@{/dist/bootstrap-4.5.2/js/bootstrap.bundle.min.js}"></script>
+	<script th:src="@{/webjars/font-awesome/js/all.min.js}"></script>
+
+	<!-- AdminLTE App -->
+	<script th:src="@{/js/adminlte.min.js}"></script>
+</body>
+<script>
+	$(document).ready(function () {
+		$("form").on("submit", function (e) {
+			e.preventDefault();
+			e.stopPropagation();
+
+			let form = $(this);
+			let CSRFToken = $("meta[name=_csrf]").attr("content");
+
+			if (form[0].checkValidity() === false) {
+				//Failed
+				form.addClass('was-validated');
+
+				return;
+			}
+
+			let data = JSON.stringify({
+				"firstName": form.find("input[name=firstname]").val(),
+				"lastName": form.find("input[name=lastname]").val(),
+				"birthday": form.find("input[name=birthday]").val(),
+				"gender": form.find("input[name=gender]").val(),
+				"email": form.find("input[name=email]").val(),
+				"phone": form.find("input[name=phone]").val(),
+				"address": form.find("input[name=address]").val(),
+				"account": {
+					"username": form.find("input[name=username]").val(),
+					"password": form.find("input[name=password]").val(),
+					"active": true,
+					"role": {
+						"id": 2
+					}
+				}
+			});
+
+			$.ajax({
+				url: form.attr("action"),
+				type: form.attr("method"),
+				data: data,
+				contentType: "application/json",
+				cache: false,
+				headers: {
+					"accept": "application/json",
+					"Access-Control-Allow-Origin": "*"
+				},
+				processData: false,
+				beforeSend: function (xhr, settings) {
+					if (typeof CSRFToken === "string")
+						xhr.setRequestHeader('X-CSRF-Token', CSRFToken);
+				},
+				success: function (data, statusText, jqXHR) {
+					window.location.replace("/login");
+				},
+				error: function (data, statusText, jqXHR) {
+					console.log(data);
+					form.find("button[type=submit]").attr("disabled", false);
+				}
+			});
+		});
+	});
+</script>
+
+</html>
