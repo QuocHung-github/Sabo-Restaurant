@@ -526,6 +526,9 @@
 				beforeSend: function (xhr, settings) {
 					if (typeof CSRFToken === "string")
 						xhr.setRequestHeader('X-CSRF-Token', CSRFToken);
+				},
+				'error': function (jqXHR, textStatus, errorThrown) {
+					table.clear().draw();
 				}
 			},
 			rowCallback: function (row, data) {

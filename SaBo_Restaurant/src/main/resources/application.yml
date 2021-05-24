@@ -42,10 +42,13 @@ spring:
   datasource:
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
     #driver-class-name:  com.mysql.cj.jdbc.Driver
-    password: 'Westpalmbeach2017'
-    url: jdbc:sqlserver://localhost:1433;databaseName=RestaurantBooking
+    #password: 'Westpalmbeach2017'
+    #url: jdbc:sqlserver://localhost:1433;databaseName=RestaurantBooking
+    url: jdbc:sqlserver://RestaurantBooking.mssql.somee.com;databaseName=RestaurantBooking
     #url: jdbc:mysql://localhost:3306/restaurantbooking
-    username: 'sa'
+    #username: 'sa'
+    username: SaBoRestaurant
+    password: SaBoRestaurant123
     #username: 'root'
     #hikari:
       #connection-timeout: 7000       
